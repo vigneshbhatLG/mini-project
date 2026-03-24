@@ -1,52 +1,52 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>DATE FORMATTER</title>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.css">
-        <link rel="stylesheet" href="style.css">
-    </head>
-    <body>
-        <div class="container">
-            <div class="card">
-                <div class="card-header">
-                    <h1>Date Formatter</h1>
-                    <p>Pick a date and choose your format</p>
+
+<head>
+    <title>DATE FORMATTER</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <h1>Date Formatter</h1>
+                <p>Pick a date and choose your format</p>
+            </div>
+
+            <div class="card-body">
+                <div class="input-section">
+                    <label for="dateInput">Select Date:</label>
+                    <input id="dateInput" type="date">
                 </div>
-                
-                <div class="card-body">
-                    <div class="input-section">
-                        <label for="dateInput">Select Date:</label>
-                        <input id="dateInput" type="text" placeholder="Click to select date">
-                    </div>
-                    
-                    <div class="formats-section">
-                        <h3>Format Options:</h3>
-                        <div class="format-buttons">
-                            <button class="format-btn active" data-format="YYYY-MM-DD">ISO (2026-03-24)</button>
-                            <button class="format-btn" data-format="MM/DD/YYYY">US (03/24/2026)</button>
-                            <button class="format-btn" data-format="DD/MM/YYYY">EU (24/03/2026)</button>
-                            <button class="format-btn" data-format="MMMM DD, YYYY">Full (March 24, 2026)</button>
-                            <button class="format-btn" data-format="ddd, MMM DD YYYY">Long (Tue, Mar 24 2026)</button>
-                            <button class="format-btn" data-format="DD-MMM-YYYY">Short (24-Mar-2026)</button>
-                        </div>
-                    </div>
-                    
-                    <div class="result-section">
-                        <label>Formatted Result:</label>
-                        <div class="result-box">
-                            <p id="result">Select a date to see the result</p>
-                        </div>
+
+                <div class="formats-section">
+                    <h3>Format Options:</h3>
+                    <div class="format-buttons">
+                        <button class="format-btn active" data-format="YYYY-MM-DD">ISO (2026-03-24)</button>
+                        <button class="format-btn" data-format="MM/DD/YYYY">US (03/24/2026)</button>
+                        <button class="format-btn" data-format="DD/MM/YYYY">EU (24/03/2026)</button>
+                        <button class="format-btn" data-format="MMMM DD, YYYY">Full (March 24, 2026)</button>
+                        <button class="format-btn" data-format="ddd, MMM DD YYYY">Long (Tue, Mar 24 2026)</button>
+                        <button class="format-btn" data-format="DD-MMM-YYYY">Short (24-Mar-2026)</button>
                     </div>
                 </div>
-                
-                <div class="card-footer">
-                    <button id="copyBtn" class="copy-btn" disabled>Copy to Clipboard</button>
+
+                <div class="result-section">
+                    <label>Formatted Result:</label>
+                    <div class="result-box">
+                        <p id="result">Select a date to see the result</p>
+                    </div>
                 </div>
             </div>
+
+            <div class="card-footer">
+                <button id="copyBtn" class="copy-btn" disabled>Copy to Clipboard</button>
+            </div>
         </div>
-        
-        <script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/date-fns@3.0.0/index.min.js"></script>
-        <script src="script.js"></script>
-    </body>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
 </html>

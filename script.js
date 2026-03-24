@@ -1,4 +1,4 @@
-// Initialize Flatpickr for date input
+// Get DOM elements
 const dateInput = document.getElementById('dateInput');
 const resultBox = document.getElementById('result');
 const copyBtn = document.getElementById('copyBtn');
@@ -7,25 +7,39 @@ const formatBtns = document.querySelectorAll('.format-btn');
 let selectedDate = null;
 let currentFormat = 'YYYY-MM-DD';
 
-// Format mapping for date-fns library
-const formatMap = {
-    'YYYY-MM-DD': 'yyyy-MM-dd',
-    'MM/DD/YYYY': 'MM/dd/yyyy',
-    'DD/MM/YYYY': 'dd/MM/yyyy',
-    'MMMM DD, YYYY': 'MMMM dd, yyyy',
-    'ddd, MMM DD YYYY': 'eee, MMM dd yyyy',
-    'DD-MMM-YYYY': 'dd-MMM-yyyy'
+// Format functions using native JavaScript methods
+const formatFunctions = {
+    'YYYY-MM-DD': (date) => date.toISOString().split('T')[0],
+    'MM/DD/YYYY': (date) => {
+        const d = new Date(date);
+        return `${String(d.getMonth() + 1).padStart(2, '0')}/${String(d.getDate()).padStart(2, '0')}/${d.getFullYear()}`;
+    },
+    'DD/MM/YYYY': (date) => {
+        const d = new Date(date);
+        return `${String(d.getDate()).padStart(2, '0')}/${String(d.getMonth() + 1).padStart(2, '0')}/${d.getFullYear()}`;
+    },
+    'MMMM DD, YYYY': (date) => {
+        const d = new Date(date);
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        return d.toLocaleDateString('en-US', options);
+    },
+    'ddd, MMM DD YYYY': (date) => {
+        const d = new Date(date);
+        const options = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' };
+        return d.toLocaleDateString('en-US', options);
+    },
+    'DD-MMM-YYYY': (date) => {
+        const d = new Date(date);
+        const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        return `${String(d.getDate()).padStart(2, '0')}-${months[d.getMonth()]}-${d.getFullYear()}`;
+    }
 };
 
-// Initialize Flatpickr
-flatpickr(dateInput, {
-    mode: 'single',
-    dateFormat: 'Y-m-d',
-    onChange: function(selectedDates) {
-        if (selectedDates.length > 0) {
-            selectedDate = selectedDates[0];
-            updateResult();
-        }
+// Listen for date input changes
+dateInput.addEventListener('change', function() {
+    if (this.value) {
+        selectedDate = new Date(this.value + 'T00:00:00');
+        updateResult();
     }
 });
 
@@ -55,8 +69,8 @@ function updateResult() {
     }
 
     try {
-        // Use date-fns for formatting
-        const formatted = window.dateFns.format(selectedDate, formatMap[currentFormat]);
+        // Use native JavaScript formatting
+        const formatted = formatFunctions[currentFormat](selectedDate);
         resultBox.textContent = formatted;
         copyBtn.disabled = false;
         resultBox.parentElement.classList.add('active');
